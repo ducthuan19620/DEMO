@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_CheckoutLayout.cshtml";
+}
+
+
+<div class="container" >
+    <div class="col-md-12" style="margin: 50px 0px;">
+        <h3 class="alert alert-danger">ĐẶT HÀNG THẤT BẠI, VUI LÒNG KIỂM TRA LẠI!</h3>
+        <div class="row">
+            <div class="col-md-12" style="margin-top: 20px;">
+                <a href='@Url.Action("LoadProductByTypeID", "Ajax")/1' class="btn karl-checkout-btn" style="color: white; font-weight: bold; font-size: 15px;"> Quay lại mua hàng </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+

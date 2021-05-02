@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "GetProduct";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+
+}
+
+<div id="result">
+
+</div>
+<script type="text/javascript">
+    $.ajax({
+        url: "LoadAllProduct",
+        success: function (response) {
+            $("div#result").html(response);
+        }
+    });
+</script>
+
+

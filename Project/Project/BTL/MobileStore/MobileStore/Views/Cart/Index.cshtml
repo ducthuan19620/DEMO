@@ -1,0 +1,135 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+
+}
+
+@using MobileStore.Models.Entity
+@model MobileStore.Models.Entity.Image
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Title  -->
+    <title>Smart Cellular | Cart</title>
+
+    <!-- Favicon  -->
+   
+
+    <!-- Core Style CSS -->
+    <link href="~/Content/Cart/css/core-style.css" rel="stylesheet" />
+
+    <link href="~/Content/Cart/style.css" rel="stylesheet" />
+
+    <!-- Responsive CSS -->
+
+    <link href="~/Content/Cart/css/responsive.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <!-- ****** Cart Area Start ****** -->
+    <div class="cart_area section_padding_100 clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="cart-table clearfix">
+                        @if (Session["cart"] != null)
+                        {
+                            <table class="table table-responsive" id="tblProduct">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (Cart item in (List<Cart>)Session["cart"])
+                                    {
+                                        <tr>
+                                            <td class="cart_product_img d-flex align-items-center">
+                                                <a href="#" id="photo">
+                                                    <img src="~/Content/images/@item.product.productImage" />
+                                                </a>
+                                                <h6 id="productName"></h6>
+                                            </td>
+                                            <td>@item.product.productName</td>
+                                            <td class="price"><span>@(string.Format("{0:#,##0}", item.product.productSale))</span></td>
+                                            <td class="quantity">
+                                                <div class="quantity">
+                                                    <input type="number" class="quantity" id="quantity" value="@item.quantity" step="1" min="1" max="99" name="quantity">
+
+                                                </div>
+                                            </td>
+                                            <td class="total_price"><span>@(double.Parse(item.product.productSale) * item.quantity) </span></td>
+                                            <td>
+                                                <div class="btn btn-primary btn-sm" style=" display: contents;">
+                                                    <a href='@Url.Action("UpdateCategoryById", "Cart")/@item.product.productID' class="btn btn-primary btn-sm">
+                                                        <i class="fa fa-edit"></i>
+                                                        Edit
+                                                    </a>
+                                                </div>
+                                                <div class="btn btn-danger btn-sm" style="width: 79px; height: 37px; background-color: #ed4646;margin-top: 5px;">
+                                                    @Ajax.ActionLink("Remove", "Remove", new { @id = item.product.productID }, new AjaxOptions
+                                                    {
+                                                        Confirm = "Bạn có muốn xóa bản ghi này?",
+                                                        OnComplete = "$('#row_" + item.product.productID + "').remove()",
+                                                        HttpMethod = "Delete"
+                                                    })
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                        else
+                        {
+                            <span class="alert alert-danger" style="font-size: 30px;">Chưa có sản phẩm nào trong giỏ hàng</span>
+                        }
+                    </div>
+
+                    <div class="cart-footer d-flex mt-30">
+                        <div class="back-to-shop w-50">
+                            <a href="@Url.Action("LoadProductByTypeID", "Ajax")/1">Mua hàng tiếp</a>
+                        </div>
+                        <div class="update-checkout w-50 text-right">
+                            <a href="@Url.Action("Remove", "Cart")">Xóa giỏ hàng</a>
+                            <a href="#">Cập nhật giỏ hàng</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ****** Cart Area End ****** -->
+    <!-- /.wrapper end -->
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+
+
+</body>
+
+</html>
+

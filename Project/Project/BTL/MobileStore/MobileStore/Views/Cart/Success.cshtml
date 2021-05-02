@@ -1,0 +1,90 @@
+﻿@using MobileStore.Models.Entity
+@model MobileStore.Models.Entity.Order
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_CheckoutLayout.cshtml";
+}
+
+
+<div class="container">
+    <div class="row">
+        <div class="middleCart">
+            <!----><div class="alertsuccess"><i class="cartnew-success"></i><strong>Đặt hàng thành công</strong></div>
+            <div class="ordercontent">
+                <p>Cảm ơn quý khách hàng: <b>@Model.name</b> đã cho Smart Cellular cơ hội được phục vụ. Trong 15 phút, nhân viên cửa hàng sẽ <b>gọi điện hoặc gửi tin nhắn xác nhận giao hàng</b> cho quý khách.</p><div class="info-order">
+                    <h4>ĐƠN HÀNG @Model.cartID<a href='@Url.Action("Index", "Cart")'>Quản lý đơn hàng</a></h4><label>
+                        <i></i><span>
+                            <strong>Người nhận hàng: </strong>
+                            @Model.name - @Model.phone
+                        </span>
+                    </label><label>
+                        <i></i><span>
+                            <strong>Giao đến: </strong>
+                            @Model.address (nhân viên sẽ gọi xác nhận trước khi giao).
+                        </span>
+                    </label><label>
+                        <i></i><span>
+                            <strong>Tổng tiền: </strong>
+                            <b class="red">
+                                @{
+                                    List<Cart> temp = (List<Cart>)Session["Cart"];
+                                    var total = String.Format("{0:N0}", temp.Sum(x => x.quantity * float.Parse(x.product.productSale)));
+                                }@total
+                            </b>
+                        </span>
+                    </label><!---->
+                </div><!---->
+                <div><a href="javascript:;" class="cancel-order__cancel-button">Hủy đơn hàng</a></div>
+                <div class="timetakegoods"><h4>Thời gian nhận hàng</h4><div class="box-order">
+                    <div fragment="1734c12088b" class="rowtime"><span>Giao trước 15h00 Hôm nay (@Model.createdDate)</span></div><!---->
+                        <ul>
+                            <li>
+                                <a href="/dtdd/oppo-a15" target="_blank" class="img-order">
+                                <img data-src="" src="" loading="lazy" class=" ls-is-cached lazyloaded"></a>
+                                <div class="text-order">
+                                    <a href="/dtdd/oppo-a15" target="_blank" class="text-order__product-name">Điện thoại OPPO A15</a>
+                                    <div class="amount-color">
+                                        @foreach (Cart cart in (List<Cart>)Session["cart"])
+                                        {
+                                            <small>Giá bán: @cart.product.productSale</small>
+                                            <small>Số lượng: @cart.quantity</small>
+                                        }
+                                    </div>
+                                 </div>
+                            </li>
+                        </ul>
+                    <div fragment="1710c8c07fb" class="lastrow">
+                        <aside class="lastrow__total">
+                            <small>Tổng tiền:</small>
+                            <small>@{
+                                        List<Cart> item = (List<Cart>)Session["Cart"];
+                                        var sum = String.Format("{0:N0}", item.Sum(x => x.quantity * float.Parse(x.product.productSale)));
+                                    }@sum
+                            </small>
+                        </aside>
+                    </div>
+                </div>
+                <div name="refund-popup">
+                    <a href="javascript:void(0)" class="refund-policy">Xem chính sách hoàn tiền online</a>
+                    
+                    <div class="hoantienonline">
+                        <div class="row-ht">
+                            <strong>Chính sách hoàn tiền khi thanh toán Online</strong>
+                            <a href="javascript:;">Đóng</a>
+                                </div><p> Trong trường hợp quý khách hàng đã mua hàng &amp; thanh toán trực tuyến thành công nhưng dư tiền, hoặc trả sản phẩm, 
+                            Thế Giới Di Động sẽ hoàn tiền vào thẻ quý khách đã dùng để thanh toán, theo thời hạn như sau: </p><p> - Đối với thẻ ATM: Thời gian 
+                            khách hàng nhận được tiền hoàn từ 7-10 ngày (trừ thứ 7, chủ nhật và ngày lễ). Nếu qua thời gian trên không nhận được tiền, Thế Giới Di Động 
+                            sẽ hỗ trợ liên hệ ngân hàng của khách hàng để giải quyết. </p><p> - Đối với thẻ Visa/Master card/JCB: Thời gian Khách hàng nhận được tiền hoàn 7-15 ngày.
+                            Nếu qua thời gian trên khách hàng không nhận được tiền, khách hàng liên hệ ngân hàng để giải quyết. </p><p> - Đối với thanh toán bằng hình thức Ví MoMo: 
+                            Thời gian Khách hàng nhận được tiền hoàn 3 - 5 ngày. Tiền được hoàn sẽ cập nhật vào tài khoản Ví MoMo. Nếu qua thời gian trên khách hàng không nhận được tiền,
+                            khách hàng liên hệ Thế Giới Di Động để được giải quyết. </p>
+                        </div>
+                        </div>
+                    </div>
+                    <a href='@Url.Action("LoadProductByTypeID", "Ajax")/1' class="buyanother"> Mua thêm sản phẩm khác </a>
+                </div>
+            </div>
+        </div>
+    
+</div>
+

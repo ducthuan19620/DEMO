@@ -1,0 +1,26 @@
+﻿
+<div class="profile clearfix">
+    <div class="profile_pic">
+        <img src="~/Content/Admin/images/img.jpg" alt="..." class="img-circle profile_img">
+    </div>
+    <div class="profile_info">
+        @if (Session["USER_SESSION"] != null)
+        {
+            <span>Welcome,</span>
+            <h2>@Session["USER_SESSION"].ToString()</h2>
+
+        }
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            alert("Success");
+
+            $("#changePassword").click(function () {
+                alert("Success");
+            });
+        });
+    </script>
+}

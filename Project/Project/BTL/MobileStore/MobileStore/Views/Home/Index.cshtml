@@ -1,0 +1,231 @@
+﻿
+@model IEnumerable<MobileStore.Models.Entity.Product>
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<div class="request-form">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h4>Bạn có vấn đề cần tư vấn?</h4>
+                <span>Hãy liên hệ ngay với chúng tôi, để nhận được sự tư vấn tốt nhất.</span>
+            </div>
+            <div class="col-md-4">
+                <a href='@Url.Action("Contact", "Contact")' class="border-button">Contact Us</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <h2>
+                        Sản phẩm <em>mới nhất</em>
+                    </h2>
+
+                </div>
+            </div>
+            @foreach (MobileStore.Models.Entity.Product p in Model)
+            {
+                <div class="col-md-4">
+                    <div class="service-item">
+                        <img src="~/Content/images/@p.productImage" alt="" style="width:350px; height:370px">
+                        <div class="down-content" style="width:350px; height:200px;">
+                            <h4>@p.productName</h4>
+                            <div style="margin-bottom:10px;">
+                                <span>
+                                    <span style="color: #d40707; font-size: 15px; font-weight: bold;">@String.Format("{0:N0}", float.Parse(p.productSale))</span><u> đ</u>  &nbsp;  <span style="font-size: 12px; font-weight: 100;"><del>@String.Format("{0:N0}", float.Parse(p.productPrice))</del></span><u> đ</u>
+                                </span>
+                            </div>
+
+
+                            <a href='@Url.Action("ProductDetail", "Product")/@Html.DisplayFor(productID => p.productID)' class="filled-button">View More</a>
+                        </div>
+                    </div>
+
+                    <br>
+                    <br />
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+<div class="fun-facts">
+    <div class="container">
+        <div class="more-info-content">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="left-image">
+                        <img src="~/Content/images/about-1-570x350.jpg" class="img-fluid" alt="">
+                    </div>
+                </div>
+                <div class="col-md-6 align-self-center">
+                    <div class="right-content">
+                        <span>Chúng tôi là ai?</span>
+                        <h2>Tìm hiểu về công ty của chúng tôi</h2>
+                        <p>Smart Cellular - là nhà bán lẻ hàng đầu, chuyên cung cấp các sản phẩm công nghệ chính hãng tại thị trường Việt Nam...</p>
+                        <a href='@Url.Action("About", "About")' class="filled-button">Đọc thêm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="more-info">
+    <div class="container">
+        <div class="section-heading">
+            <h2>Đọc Blog</h2>
+            <span>Tham khảo Blog của chúng tôi</span>
+        </div>
+
+        <div class="row" id="tabs">
+            <div class="col-md-4">
+                <ul>
+                    <li><a href='#tabs-1'>Công bố OPPO Reno5 Z, điện thoại thông minh 5G được trang bị camera bốn <br> <small>Tuấn Anh &nbsp;|&nbsp; April 07, 2021</small></a></li>
+                    <li><a href='#tabs-2'>Công bố phiên bản tối cao của điện thoại thông minh 5G Realme X7 Pro được trang bị ba camera<br> <small>Hoàng Thảo &nbsp;|&nbsp; April 09, 2021</small></a></li>
+                    <li><a href='#tabs-3'>Giới thiệu điện thoại thông minh 5G Vivo S9e với Mật độ 820<br> <small>Mai Phú &nbsp;|&nbsp; April 02, 2021 </small></a></li>
+                    <li><a href='#tabs-4'>Thiết bị Honor công bố máy tính bảng đầu tiên HONOR Pad 7<br> <small>Giang Sơn &nbsp;|&nbsp; April 10, 2021 </small></a></li>
+                </ul>
+
+                <br>
+
+                <div class="text-center">
+                    <a href='@Url.Action("Blog", "Blog")' class="filled-button">Read More</a>
+                </div>
+
+                <br>
+            </div>
+
+            <div class="col-md-8">
+                <section class='tabs-content'>
+                    <article id='tabs-1'>
+                        <img src="~/Content/images/Blog_01.jpg" class="img-fluid" alt="">
+                        <h4><a href='@Url.Action("BlogDetail", "Blog")'>Công bố OPPO Reno5 Z, điện thoại thông minh 5G được trang bị camera bốn </a></h4>
+                        <p>
+                            Viễn thông di động OPPO Quảng Đông của Trung Quốc đã công bố thiết bị đầu cuối NR / LTE / W-CDMA / GSM "OPPO Reno5 Z (CPH2211)".
+
+                            Nó là một điện thoại thông minh tầm trung tương thích với hệ thống thông tin di động thế hệ thứ 5 (5G).
+
+                            ColorOS 11.1 dựa trên Android 11 được sử dụng làm hệ điều hành.
+
+                            Chipset là MediaTek Dimensity 800U hỗ trợ 64bit và CPU là tám lõi.
+
+                            Màn hình được trang bị AMOLED 6,43 inch FHD + (1080 * 2400).
+
+                            Máy ảnh bao gồm cảm biến hình ảnh CMOS chính khoảng 48 triệu điểm ảnh, một máy ảnh góc cực rộng cảm biến hình ảnh CMOS khoảng 8 triệu điểm ảnh, cảm biến hình ảnh CMOS macro khoảng 2 triệu điểm ảnh và cảm biến đơn sắc cảm biến hình ảnh CMOS khoảng 2 triệu điểm ảnh . Nó được trang bị một camera quad và cảm biến hình ảnh CMOS với khoảng 16 triệu điểm ảnh ở mặt trước.
+                        </p>
+                    </article>
+                    <article id='tabs-2'>
+                        <img src="~/Content/images/Blog_02.jpg" alt="">
+                        <h4><a href='@Url.Action("BlogDetail", "Blog")'>Công bố phiên bản tối cao của điện thoại thông minh 5G Realme X7 Pro được trang bị ba camera</a></h4>
+                        <p>
+                            RealMe Chongqing Mobile Telecommunications của Trung Quốc đã công bố thiết bị đầu cuối NR / LTE / W-CDMA / CDMA2000 / GSM "realme X7 Pro Supreme Edition".
+
+                            Nó là điện thoại thông minh tương thích với hệ thống thông tin di động thế hệ thứ 5 (5G).
+
+                            Realme UI 2.0 dựa trên Android 11 được sử dụng làm hệ điều hành.
+
+                            Chipset được trang bị MediaTek Dimensity 1000+ hỗ trợ 64 bit và CPU là một lõi tám.
+
+                            Màn hình sẽ có kích thước khoảng 6,55 inch FHD + (1080 * 2400) AMOLED với tốc độ làm tươi lên đến 90Hz.
+                        </p>
+                    </article>
+                    <article id='tabs-3'>
+                        <img src="~/Content/images/Blog_03.jpg" alt="">
+                        <h4><a href='@Url.Action("BlogDetail", "Blog")'>Giới thiệu điện thoại thông minh 5G Vivo S9e với Mật độ 820</a></h4>
+                        <p>
+                            Thông tin di động vivo của Trung Quốc đã công bố thiết bị đầu cuối NR / LTE / W-CDMA / CDMA2000 / GSM "vivo S9e (V2048A)".
+
+                            Nó là điện thoại thông minh tương thích với hệ thống thông tin di động thế hệ thứ 5 (5G).
+
+                            OriginOS 1.0, dựa trên Android 11, sẽ được sử dụng làm hệ điều hành.
+
+                            Chipset được trang bị MediaTek Dimensity 820 hỗ trợ 64 bit.
+
+                            CPU là một lõi tám và tần số hoạt động bao gồm lõi tứ với tốc độ tối đa là 2,6 GHz và lõi tứ với tốc độ tối đa là 2,0 GHz.
+
+                            Màn hình có kích thước khoảng 6,44 inch FHD + (1080 * 2404) AMOLED với tốc độ làm mới lên đến 90Hz.
+                        </p>
+                    </article>
+                    <article id='tabs-4'>
+                        <img src="~/Content/images/Blog_04.jpg" alt="">
+                        <h4><a href='@Url.Action("BlogDetail", "Blog")'>Thiết bị Honor công bố máy tính bảng đầu tiên HONOR Pad 7</a></h4>
+                        <p>
+                            Thiết bị danh dự của Trung Quốc đã công bố thiết bị đầu cuối LTE / W-CDMA / CDMA2000 / GSM "HONOR Pad 7".
+
+                            Nó là một máy tính bảng sử dụng Magic UI 4.0, dựa trên Android 10 làm hệ điều hành.
+
+                            Chipset được trang bị MediaTek MT8786.
+
+                            CPU là một lõi tám và tần số hoạt động bao gồm lõi kép với tối đa 2,0 GHz và lõi sáu với tối đa 1,8 GHz.
+
+                            Màn hình được trang bị tinh thể lỏng IPS kích thước 10,1 inch WUXGA (1920 * 1200) và mật độ điểm ảnh là 224 ppi.
+                        </p>
+                    </article>
+                </section>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+@Html.Action("GetAllComment")
+
+<div class="callback-form">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <h2>Đóng góp ý kiến</h2>
+                    <span>Nếu bạn có ý kiến đóng góp, xin hãy để lại thông tin của bạn cho chúng tôi.</span>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="contact-form">
+                    <form id="contact" action="" method="post">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <fieldset>
+                                    <input name="name" type="text" class="form-control" id="name" placeholder="Full Name" required="">
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <fieldset>
+                                    <input name="email" type="text" class="form-control" id="email" placeholder="E-Mail Address" required="">
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <fieldset>
+                                    <input name="subject" type="text" class="form-control" id="subject" placeholder="Phone Number" required="">
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <fieldset>
+                                    <textarea name="message" rows="6" class="form-control" id="message" placeholder="Your Message" required=""></textarea>
+                                </fieldset>
+                            </div>
+                            <div class="col-lg-12">
+                                <fieldset>
+                                    <button type="submit" id="form-submit" class="border-button">Send Message</button>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+

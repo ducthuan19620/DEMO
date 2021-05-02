@@ -1,0 +1,119 @@
+﻿@using MobileStore.Models.Entity
+@model MobileStore.Models.Entity.Image
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_CheckoutLayout.cshtml";
+}
+
+
+<div class="Content">
+  
+    <!-- ****** Checkout Area Start ****** -->
+    <div class="checkout_area section_padding_100">
+        <div class="container">
+            <div class="row">
+                @if (Session["cart"] != null)
+                {
+                    <div class="col-12 col-md-6">
+                        <div class="checkout_details_area mt-50 clearfix">
+
+                            <div class="cart-page-heading">
+                                <h5>Billing Address</h5>
+                                <p>Enter your cupone code</p>
+                            </div>
+
+                            @using (Html.BeginForm("Payment", "Cart", FormMethod.Post))
+                            {
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="first_name">Name <span>*</span></label>
+                                <input type="text" class="form-control" name="name" value="" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="last_name">Phone <span>*</span></label>
+                                <input type="number" class="form-control" name="phone" value="" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="last_name">Email <span>*</span></label>
+                                <input type="text" class="form-control" name="email" value="" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="last_name">Address <span>*</span></label>
+                                <input type="text" class="form-control" name="address" value="" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="company">City</label>
+                                <input type="text" class="form-control" name="city" value="" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="company">State</label>
+                                <input type="text" class="form-control" name="state" value="" required>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label for="company">Payment method</label>
+                                <input type="text" class="form-control" name="paymentMethod" value="" required>
+                            </div>
+                        </div>
+                                <div class="row">
+                                    <div class="col-md-12" style="margin-top: 20px;">
+                                        <button type="submit" style="color: white; font-weight: bold; font-size: 15px;" id="PlaceOrder" class="btn karl-checkout-btn">Place order</button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 col-md-6 col-lg-5 ml-lg-auto">
+                        <div class="order-details-confirmation">
+
+                            <div class="cart-page-heading">
+                                <h5>Your Order</h5>
+                                <p>The Details</p>
+                            </div>
+
+                            <ul class="order-details-form mb-4">
+                                <li><span style="font-weight: bold;">Product</span> <span style="font-weight: bold;">Total</span></li>
+                                @foreach (Cart item in (List<Cart>)Session["cart"])
+                                {
+                                    <li><span>@item.product.productName</span> <span>@(String.Format("{0:N0}", float.Parse(item.product.productSale)))</span></li>
+                                    <li><span>Quantity</span> <span>@item.quantity</span></li>
+                                }
+
+                                <li>
+                                    <span style="font-weight: bold;">Total</span>
+                                    <span style="font-weight: bold;">
+                                        @{
+                                            List<Cart> temp = (List<Cart>)Session["Cart"];
+                                            var total = String.Format("{0:N0}", temp.Sum(x => x.quantity * float.Parse(x.product.productSale)));
+                                        }@total
+                                    </span>
+                                </li>
+                            </ul>
+
+                           
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <span class="alert alert-danger" style="font-size: 30px;">Chưa có sản phẩm nào trong giỏ hàng</span>
+                }
+            </div>
+        </div>
+    </div>
+</div>    
+
+
+   
+        
+    
+
+
+
+
+
+
+
+
+

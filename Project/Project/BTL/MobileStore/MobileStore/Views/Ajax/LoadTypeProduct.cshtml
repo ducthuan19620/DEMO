@@ -1,0 +1,21 @@
+﻿@model IEnumerable<MobileStore.Models.Entity.Category>
+
+<li class="nav-item dropdown">
+
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Products
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <ul>
+            @foreach (MobileStore.Models.Entity.Category item in Model)
+            {
+                <li id="@item.TypeID">
+                    <a class="dropdown-item" href='@Url.Action("LoadProductByTypeID", "Ajax")/@item.TypeID'>@item.TypeName</a>
+                </li>
+            }
+        </ul>
+
+    </div>
+</li>
+
+

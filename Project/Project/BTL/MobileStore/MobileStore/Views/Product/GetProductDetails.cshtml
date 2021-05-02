@@ -1,0 +1,74 @@
+﻿@model PagedList.IPagedList<MobileStore.Models.Entity.Product>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "GetAllProductByType";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+
+<!-- Page Content -->
+<div class="page-heading header-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>SMART PHONE</h1>
+                <span>KẾT NỐI VỚI HÀNH TRÌNH CỦA BẠN, KẾT NỐI VỚI TƯƠNG LAI.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="services">
+    <div class="container">
+        <div class="row">
+            @foreach (MobileStore.Models.Entity.Product sp in Model)
+            {
+                <div class="col-md-4">
+                    <div class="service-item">
+                        <img src="~/Content/images/@sp.productImage" alt="" style="width:350px; height:370px">
+                        <div class="down-content" style="width:350px; height:200px;">
+                            <h4>@sp.productName</h4>
+                            <div style="margin-bottom:10px;">
+                                <span>
+                                    <span style="color:red; font-size:15px; font-weight: bold;">@sp.productSale</span><u> đ</u>  &nbsp;  <span style="font-size: 13px; font-weight:bold"><del>@sp.productPrice</del></span><u> đ</u>
+                                </span>
+                            </div>
+
+
+                            <a href='@Url.Action("ProductDetail", "Product")/@Html.DisplayFor(productID => sp.productID)' class="filled-button">View More</a>
+                        </div>
+                    </div>
+
+                    <br>
+                    <br />
+                </div>
+            }
+
+
+        </div>
+
+        <br>
+        <br>
+
+        <nav>
+            <ul class="pagination pagination-lg justify-content-center">
+                <li class="page-item">
+                    <!-- Thêm mã phân trang -->
+                    <br />
+                    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+                    @Html.PagedListPager(Model, page => Url.Action("Products",
+                        new { page }))
+                    <!-- Kết thúc -->
+                </li>
+
+            </ul>
+        </nav>
+
+
+    </div>
+</div>
+
+
+

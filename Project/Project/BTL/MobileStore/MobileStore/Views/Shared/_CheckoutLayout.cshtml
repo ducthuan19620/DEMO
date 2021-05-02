@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Cellular</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/Admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/Content/Admin/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/Content/Admin/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="~/Content/Admin/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+
+    <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/fontawesome.css" rel="stylesheet" />
+    <link href="~/Content/css/owl.css" rel="stylesheet" />
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    
+
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Title  -->
+    <!-- Core Style CSS -->
+    <link href="~/Content/Cart/css/core-style.css" rel="stylesheet" />
+
+    <!-- Responsive CSS -->
+
+    <link href="~/Content/Cart/css/responsive.css" rel="stylesheet" />
+    <script src="~/Content/jquery/jquery.min.js"></script>
+
+</head>
+<body style="height: 500px;">
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+    <!-- Header -->
+    <!-- Header -->
+    <div class="sub-header">
+        <div class="container checkout">
+            <div class="row">
+                <div class="col-md-8 col-xs-12">
+                    <ul class="left-info">
+                        <li><a href="https://mail.google.com/"><i class="fa fa-envelope"></i>smartcellular@company.com</a></li>
+                        <li><a href="#"><i class="fa fa-phone"></i>0967.666.888</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="right-icons">
+                        <li><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="https://www.linkedin.com/"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="Header" style="background: #343434; height:80px;">
+        <div class="container checkout">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar navbar-expand-lg">
+                        <div class="container">
+                            <a class="navbar-brand" href='@Url.Action(" Index", "Home")'><h2>Smart Cellular<em> Website</em></h2></a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarResponsive">
+                                <ul class="navbar-nav ml-auto" style="line-height: 70px;">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href='@Url.Action("Index", "Home")'>
+                                            Home
+                                            <span class="sr-only">(current)</span>
+                                        </a>
+                                    </li>
+                                    @Html.Action("LoadTypeProduct", "Ajax")
+                                    <li class="nav-item">
+                                        <a class="nav-link" href='@Url.Action("Checkout", "Checkout")'>Checkout</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">About</a>
+
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href='@Url.Action("About", "About")'>About Us</a>
+                                            <a class="dropdown-item" href='@Url.Action("Blog", "Blog")'>Blog</a>
+                                            <a class="dropdown-item" href='@Url.Action("Testimonials", "Testimonials")'>Testimonials</a>
+                                            <a class="dropdown-item" href='@Url.Action("Terms", "Terms")'>Terms</a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href='@Url.Action("Contact", "Contact")'>Contact Us</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        @{Html.RenderAction("GetNumber", "Cart");}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Page Content -->
+    <!-- Banner Starts Here -->
+    <div class="main-banner header-text" id="top" style="min-height: 450px;">
+        @RenderBody();
+    </div>
+    <!-- Banner Ends Here -->
+
+    <div class="sub-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        Design by: Smart Cellular
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ****** Cart Area End ****** -->
+    <!-- /.wrapper end -->
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="~/Content/Cart/js/jquery/jquery-1.8.3.min.js"></script>
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Content/jquery/jquery.min.js"></script>
+    <script src="~/Content/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Additional Scripts -->
+    <script src="~/Content/js/custom.js"></script>
+    <script src="~/Content/js/owl.js"></script>
+    <script src="~/Content/js/slick.js"></script>
+    <script src="~/Content/js/accordions.js"></script>
+
+    <script language="text/Javascript">
+        cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+        function clearField(t) {                   //declaring the array outside of the
+            if (!cleared[t.id]) {                      // function makes it static and global
+                cleared[t.id] = 1;  // you could use true and false, but that's more typing
+                t.value = '';         // with more chance of typos
+                t.style.color = '#fff';
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        $("li").click(function (e) {
+            var catid = $(this).attr("id");
+
+
+            $.ajax({
+                url: '/ Product/LoadAllProduct',
+                data: { "id": catid },
+                success: function (response) {
+                    $('#result').html(response);
+                }
+            });
+        });
+
+    </script>
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @RenderSection("updateCarts", required: false)
+</body>
+</html>
+
+

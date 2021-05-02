@@ -1,0 +1,87 @@
+﻿@model IEnumerable<MobileStore.Models.Entity.Product>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- page content -->
+<div class="right_col" role="main">
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_title">
+
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li>
+                                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            </li>
+                            <li>
+                                <a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="creatProduct">
+                            <a href='@Url.Action("CreateNewProduct", "AdminPage")' class="btnCreate">+ Thêm Mới sản phẩm</a>
+                        </div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card-box table-responsive">
+                                    <table id="datatable" class="table table-striped table-bordered" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 5px;">STT</th>
+                                                <th>Hình ảnh</th>
+                                                <th>Tên sản phẩm</th>
+                                                <th style="width: 115px;">Loại sản phẩm</th>
+                                                <th style="width: 100px;">Trạng thái</th>
+                                                <th style="width: 100px;">Hoạt động</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @foreach (MobileStore.Models.Entity.Product item in Model)
+                                            {
+                                                <tr id="row_@item.productID">
+                                                    <td>@item.productID</td>
+                                                    <td style="width: 100px;"><img src="~/Content/images/@item.productImage" style="width: 135px;" /></td>
+                                                    <td>@item.productName</td>
+                                                    <td>@item.TypeID</td>
+                                                    <td>@item.Status</td>
+                                                    <td class="text-center">
+                                                        <div class="btn btn-primary btn-sm" style=" display: contents;">
+                                                            <a href='@Url.Action("UpdateProduct", "AdminPage")/@item.productID' class="btn btn-primary btn-sm">
+                                                                <i class="fa fa-edit"></i>
+                                                                Edit
+                                                            </a>
+                                                        </div>
+                                                        <div class="btn btn-danger btn-sm" style="display:inherit;">
+                                                            @Ajax.ActionLink("Delete", "Delete", new { @id = item.productID }, new AjaxOptions
+                                                            {
+                                                                Confirm = "Bạn có muốn xóa bản ghi này?",
+                                                            OnComplete = "$('#row_" + item.productID + "').remove()",
+                                                            HttpMethod = "Delete"
+                                                        })
+                                                        </div>
+
+                                                    </td>
+
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /page content -->

@@ -1,0 +1,74 @@
+﻿@model IEnumerable<MobileStore.Models.Entity.Blog>
+@{
+    ViewBag.Title = "Blog";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+<!-- Page Content -->
+<div class="page-heading header-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Blog</h1>
+                <span>Cùng nhau chia sẻ kiến thức</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="single-services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <section class='tabs-content'>
+                    @foreach (MobileStore.Models.Entity.Blog b in Model)
+                    {
+                        <article id='tabs-1'>
+                            <img src="~/Content/images/@b.ImageBlog" alt="">
+                            <h4><a href="blog-details.html">@b.TitleBlog</a></h4>
+                            <div style="margin-bottom:10px;">
+                                <span>@b.NameUser &nbsp;|&nbsp; @b.Time &nbsp;|&nbsp; 15 comments</span>
+                            </div>
+                            <p>@b.Summary</p>
+                            <br>
+                            <div>
+                                <a href='@Url.Action("BlogDetail", "Blog")/@Html.DisplayFor(blogID => b.BlogID)' class="filled-button">Continue Reading</a>
+                            </div>
+                        </article>
+
+                        <br>
+                        <br>
+                        <br>
+                    }
+                </section>
+            </div>
+
+            <div class="col-md-4">
+                <h4 class="h4">Search</h4>
+
+                <form id="search_form" name="gs" method="GET" action="#">
+                    <input type="text" name="q" class="form-control form-control-lg" placeholder="type to search..." autocomplete="on">
+                </form>
+
+                <br>
+                <br>
+
+                <h4 class="h4">Recent posts</h4>
+
+                <ul>
+                    @foreach (MobileStore.Models.Entity.Blog b in Model)
+                    {
+                        <li>
+                            <h5 style="margin-bottom:10px;"><a href='@Url.Action("BlogDetail", "Blog")/@Html.DisplayFor(blogID => b.BlogID)'> @b.TitleBlog</a></h5>
+                            <small><i class="fa fa-user"></i> @b.NameUser &nbsp;|&nbsp; <i class="fa fa-calendar"></i> @b.Time</small>
+                        </li>
+                    }
+
+
+                    </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+

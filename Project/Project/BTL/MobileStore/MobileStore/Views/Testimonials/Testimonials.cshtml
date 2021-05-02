@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MobileStore.Models.Entity.Comment>
+@{
+    ViewBag.Title = "Testimonials";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+<!-- Page Content -->
+<div class="page-heading header-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Bình luận</h1>
+                <span>Những chia sẻ chân thực từ khách hàng</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="testimonials" style="margin: 0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="owl-testimonials owl-carousel">
+
+                    @foreach (MobileStore.Models.Entity.Comment c in Model)
+                    {
+                        <div class="testimonial-item">
+                            <div class="inner-content">
+                                <h4>@c.NameUser</h4>
+                                <span>@c.Job</span>
+                                <p>@c.CommentContent</p>
+                            </div>
+                            <img src="http://placehold.it/60x60" alt="">
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

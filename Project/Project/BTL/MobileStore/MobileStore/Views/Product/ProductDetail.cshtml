@@ -1,0 +1,90 @@
+﻿@model IEnumerable<MobileStore.Models.DAO.productViewModel>
+@using MobileStore.Models.Entity
+
+
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+    List<Cart> cart = null;
+    ViewBag.GioHangCount = 0;
+    if (Session["cart"] != null)
+    {
+        cart = (List<Cart>)Session["cart"];
+        ViewBag.GioHangCount = cart.Count;
+    }
+}
+
+<!-- Page Content -->
+<div class="page-heading header-text">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Thông tin chi tiết sản phẩm</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                @Html.Action("GetProductById");
+
+                <br>
+                <br>
+            </div>
+
+            <div class="col-md-5">
+                @Html.Action("ProductInfor")
+
+                <br>
+
+                <br>
+
+                <br>
+
+                <form action="" method="post">
+                    
+                    @Html.Action("ProductByID")
+
+                </form>
+                <br>
+            </div>
+        </div>
+
+        <br>
+        @Html.Action("Productintro")
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            var number = @ViewBag.GioHangCount;
+            $("#addToCart").click(function () {
+                var color = $("#imageById option:selected").val();
+                var quantity = $('#quantity-product').val();
+                var id = $('#imageMain').attr('value');
+                
+                number = Number($("#numberProducts").text()) + 1
+                $("#numberProducts").text(number);
+                $("#ColorProduct").text(color);
+                $.ajax({
+                    url: '@Url.Action("Buy", "Cart")',
+                    type: 'POST',
+                    data: { "id": id},
+                    success: function (reponse) {
+
+                    }
+                });
+            });
+        });
+    </script>
+}
+
+
+

@@ -1,0 +1,86 @@
+﻿@using MobileStore.Models.Entity
+@model MobileStore.Models.Entity.Order
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_PaymentLayout.cshtml";
+}
+
+<div id="app">
+    <section>
+        <div class="middleCart">
+            <div class="alertsuccess"><i class="fa fa-shopping-bag"></i><strong>Đặt hàng thành công</strong></div>
+            <div class="ordercontent">
+                <p>Cảm ơn quý khách hàng: <b>@Model.name</b> đã cho Smart Cellular cơ hội được phục vụ. Trong 15 phút, nhân viên cửa hàng sẽ <b>gọi điện hoặc gửi tin nhắn xác nhận giao hàng</b> cho quý khách.</p>
+                <div class="info-order">
+                    <h4>ĐƠN HÀNG #@Model.cartID<a href='@Url.Action("Index", "Cart")'>Quản lý đơn hàng</a></h4><label>
+                        <i></i><span>
+                            <strong>Người nhận hàng: </strong>
+                            @Model.name - @Model.phone
+                        </span>
+                    </label><label>
+                        <i></i><span>
+                            <strong>Giao đến: </strong>
+                            @Model.address (nhân viên sẽ gọi xác nhận trước khi giao).
+                        </span>
+                    </label><label>
+                        <i></i><span>
+                            <strong>Tổng tiền: </strong>
+                            <b class="red">
+                                @{
+                                    List<Cart> temp = (List<Cart>)Session["Cart"];
+                                    var total = String.Format("{0:N0}", temp.Sum(x => x.quantity * float.Parse(x.product.productSale)));
+                                }@total
+                            </b>
+                        </span>
+                    </label><!---->
+                </div>
+                <div fragment="60e799d265" class="cancel-order">
+                    @Html.ActionLink("Hủy đơn hàng", "RemovePayment", "Cart", new { cartID = Model.cartID }, new { onclick = "return confirm('Bạn có chắc muốn hủy đơn hàng này?');" })
+                </div>
+                <div class="timetakegoods">
+                    <h4>Thời gian nhận hàng</h4>
+                    <div class="box-order">
+                        <div fragment="1734c12088b" class="rowtime"><span>Giao trước 15h00 hôm sau</span></div><!---->
+                        <ul>
+                            <li>
+                                @foreach (Cart cart in (List<Cart>)Session["cart"])
+                                {
+                                    <a href='@Url.Action("ProductDetail", "Product")/@cart.product.productID' target="_blank" class="img-order">
+                                        <img src="~/Content/images/@cart.product.productImage" loading="lazy" class=" ls-is-cached lazyloaded" />
+                                    </a>
+                                    <div class="text-order">
+                                        <a href='@Url.Action("ProductDetail", "Product")/@cart.product.productID' target="_blank" class="text-order__product-name"><strong>@cart.product.productName</strong></a>
+                                        <div class="amount-color">
+                                            <small>Giá bán: @String.Format("{0:N0}", cart.product.productSale)</small>
+                                            <small>Số lượng: @cart.quantity</small>
+                                        </div>
+                                    </div>
+                                }
+                            </li>
+                        </ul>
+                        <div fragment="1710c8c07fb" class="lastrow">
+                            <aside class="lastrow__total">
+                                <small>Tổng tiền:</small>
+                                <small>
+                                    @{
+                                        List<Cart> item = (List<Cart>)Session["Cart"];
+                                        var sum = String.Format("{0:N0}", item.Sum(x => x.quantity * float.Parse(x.product.productSale)));
+                                    }@sum
+                                </small>
+                            </aside>
+                        </div>
+                    </div>
+
+                    <div name="refund-popup">
+                        <a href='@Url.Action("LoadProductByTypeID", "Ajax")/1' class="buyanother"> Mua thêm sản phẩm khác </a>
+                    </div>
+
+                </div>
+               
+            </div>
+        </div>
+    </section>
+</div>
+    
+
+

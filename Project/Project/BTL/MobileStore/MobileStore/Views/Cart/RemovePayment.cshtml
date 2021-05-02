@@ -1,0 +1,23 @@
+﻿@using MobileStore.Models.Entity
+@model MobileStore.Models.Entity.Order
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_PaymentLayout.cshtml";
+}
+
+<div id="app">
+    <section>
+        <div class="middleCart">
+            <div class="alertsuccess"><i class="fa fa-shopping-bag"></i><strong>huỷ đơn hàng thành công</strong></div>
+            <div class="row">
+                <div class="col-md-12" style="margin-top: 20px;">
+                    <a href='@Url.Action("LoadProductByTypeID", "Ajax")/1' class="btn karl-checkout-btn" style="color: white; font-weight: bold; font-size: 15px;"> Quay lại mua hàng </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+

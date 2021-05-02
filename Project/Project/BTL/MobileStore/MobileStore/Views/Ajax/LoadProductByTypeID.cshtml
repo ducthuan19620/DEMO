@@ -1,0 +1,105 @@
+﻿@model List<MobileStore.Models.Entity.Product>
+
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+<!-- Page Content -->
+<div class="page-heading header-text">
+    <div class="container">
+        <div class="">
+            <div class="col-md-12">
+                <h1>Smart Cellular</h1>
+                <span>KẾT NỐI VỚI HÀNH TRÌNH CỦA BẠN, KẾT NỐI VỚI TƯƠNG LAI.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="services">
+    <div class="container">
+        <div class="row">
+            @foreach (MobileStore.Models.Entity.Product sp in Model)
+            {
+                <div class="col-md-4">
+                    <div class="service-item">
+                        <img src="~/Content/images/@sp.productImage" alt="" style="width:350px; height:370px">
+                        <div class="down-content" style="width:350px; height:200px;">
+                            <h4>@sp.productName</h4>
+                            <div style="margin-bottom:10px;">
+                                <span>
+                                    <span style="color: #d40707; font-size: 15px; font-weight: bold;">@String.Format("{0:N0}", float.Parse(sp.productSale))</span><u> đ</u>  &nbsp;  <span style="font-size: 12px; font-weight: 100;"><del>@String.Format("{0:N0}", float.Parse(sp.productPrice))</del></span><u> đ</u>
+                                </span>
+                            </div>
+
+
+                            <a href='@Url.Action("ProductDetail", "Product")/@sp.productID' class="filled-button">View More</a>
+                        </div>
+                    </div>
+
+                    <br>
+                    <br />
+                </div>
+            }
+
+
+
+        </div>
+
+        <br>
+        <br>
+
+        <!--Phân trang-->
+        @if(ViewBag.TotalPage > 0)
+        {
+            var id = (int)ViewBag.Id;
+            var pageDisplay = (int)ViewBag.MaxPage;
+            int totalPage = (int)ViewBag.TotalPage;
+            int currentPage = ((int)ViewBag.Page);
+
+            var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+            var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+            var link = "https://localhost:44323/Ajax/LoadProductByTypeID/" + (int)id;
+            <nav>
+                <ul class="pagination">
+                    @if (currentPage > ViewBag.First)
+                    {
+                        <li><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i></a></li>
+                        
+                        <li><a href="@link?page=@ViewBag.Prev" title="Trang trước" class="first"><i class="fa fa-angle-left"></i></a></li>
+                    }
+                    @for (int i = startPageIndex; i <= endPageIndex; i++)
+                    {
+                        if (currentPage == i)
+                        {
+                            <li><a href="@link?page=@i" class="active" title="Trang @i">@i</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@link?page=@i" title="Trang @i">@i</a></li>
+                        }
+                    }
+                    @if (currentPage < totalPage)
+                    {
+                        <li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau"><i class="fa fa-angle-right"></i></a></li>
+                        <li><a href="@link?page=@ViewBag.Last" class="next" title="Trang trang cuối"><i class="fa fa-angle-double-right"></i></a></li>
+                    }
+                </ul>
+            </nav>
+           
+        }
+        else
+        {
+            <div class="col-md-12">
+                <span class="alert alert-danger" style="width: 100%; font-size: 30px; display: inline-block; text-align: center;">Không có sản phẩm nào</span>
+            </div>
+        }
+
+        
+
+    </div>
+</div>
+
+

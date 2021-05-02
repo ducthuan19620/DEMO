@@ -1,0 +1,10 @@
+﻿@model IEnumerable<MobileStore.Models.Entity.Category>
+<ul class="nav child_menu">
+    @foreach (MobileStore.Models.Entity.Category item in Model)
+    {
+        <li><a href='@Url.Action("GetProductByTypeId", "Ajax")/@Html.DisplayFor(TypeID => item.TypeID)'>@item.TypeName</a></li>
+    }
+
+
+</ul>
+

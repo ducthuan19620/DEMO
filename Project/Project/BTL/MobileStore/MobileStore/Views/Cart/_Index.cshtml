@@ -1,0 +1,170 @@
+﻿
+@{
+    Layout = null;
+}
+
+@using MobileStore.Models.Entity
+@model MobileStore.Models.Entity.Image
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Title  -->
+    <title> Smart Cellular | Cart</title>
+
+    <!-- Favicon  -->
+    <link rel="icon" href="~/Content/Cart/img/core-img/favicon.ico">
+
+    <!-- Core Style CSS -->
+    <link href="~/Content/Cart/css/core-style.css" rel="stylesheet" />
+    
+    <!-- Responsive CSS -->
+
+    <link href="~/Content/Cart/css/responsive.css" rel="stylesheet" />
+    <script src="~/Content/jquery/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <!-- ****** Top Discount Area Start ****** -->
+    <section class="top-discount-area d-md-flex align-items-center">
+        <!-- Single Discount Area -->
+        <div class="single-discount-area">
+            <h5>Free Shipping &amp; Returns</h5>
+            <h6><a href="#">BUY NOW</a></h6>
+        </div>
+        <!-- Single Discount Area -->
+        <div class="single-discount-area">
+            <h5>20% Discount for all dresses</h5>
+            <h6>USE CODE: Colorlib</h6>
+        </div>
+        <!-- Single Discount Area -->
+        <div class="single-discount-area">
+            <h5>20% Discount for students</h5>
+            <h6>USE CODE: Colorlib</h6>
+        </div>
+    </section>
+    <!-- ****** Top Discount Area End ****** -->
+    <div class="cart_area section_padding_100 clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="cart-table clearfix">
+                        @if (Session["cart"] != null)
+                        {
+                            using (Html.BeginForm("UpdateCart", "Cart", FormMethod.Post))
+                            {
+                                <table class="table table-responsive" id="tblProduct">
+                                    <thead>
+                                        <tr>
+                                            <th>Sản phẩm</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Giá bán</th>
+                                            <th>Số lượng</th>
+                                            <th>Thành tiền</th>
+                                            <th>Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (Cart item in (List<Cart>)Session["cart"])
+                                        {
+                                            <tr id="row_@item.product.productID">
+                                                <td class="cart_product_img d-flex align-items-center">
+                                                    <a href="#" id="photo">
+                                                        <img src="~/Content/images/@item.product.productImage" />
+                                                    </a>
+                                                    <h6 id="productName"></h6>
+                                                </td>
+                                                <td>@item.product.productName</td>
+                                                <td class="price"><span>@(String.Format("{0:N0}", float.Parse(item.product.productSale)))</span></td>
+                                                <td class="quantity">
+                                                    <div class="quantity">
+                                                        <span class="qty-minus" onclick="var effect = document.getElementById('quantity'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
+                                                        <input type="number" class="quantity" id="quantity" data-id="@item.product.productID" value="@item.quantity" step="1" min="1" max="99" name="quantity">
+                                                        <span class="qty-plus" onclick="var effect = document.getElementById('quantity'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+                                                    </div>
+                                                </td>
+                                                <td class="total_price"><span>@String.Format("{0:N0}", item.quantity * float.Parse(item.product.productSale)) </span></td>
+                                                <td>
+
+                                                    <div class="btn btn-danger btn-sm" style="width: 100px; height: 37px;background-color: #f1efef;; margin-top: 5px;">
+                                                        <a href="#" id="DeleteCart">@Html.ActionLink("Xóa khỏi giỏ", "Remove", "Cart", new { id = item.product.productID }, new { onclick = "return confirm('Bạn có chắc muốn xóa sản phẩm này?');" })</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+
+
+                                    </tbody>
+                                    <tr style="border: 1px solid black;">
+                                        <td colspan="4">Tổng tiền:</td>
+                                        <td colspan="2">
+                                            @{
+                                                List<Cart> temp = (List<Cart>)Session["Cart"];
+                                                var total = String.Format("{0:N0}", temp.Sum(x => x.quantity * float.Parse(x.product.productSale)));
+                                            }@total
+                                        </td>
+                                    </tr>
+
+                                </table>
+                                <div class="cart-footer d-flex mt-30">
+                                    <div class="back-to-shop w-50">
+                                        <a href="@Url.Action("Checkout", "Checkout")">Thanh toán</a>
+                                    </div>
+                                    <div class="update-checkout w-100 text-right" style=" width: 43% !important">
+                                        @Html.ActionLink("Xóa giỏ hàng", "RemoveCart", "Cart", new { onclick = "return confirm('Bạn có chắc muốn xóa giỏ hàng này?');" })
+                                        <input type="submit" value="Cập nhật giỏ hàng" id="UpdateCart" style="display: inline; background: #f4f2f8;
+                                        border: 6.01px;width: 34%;height: 54px;" />
+                                    </div>
+                                </div>
+                            }
+
+                        }
+                        else
+                        {
+                            <span class="alert alert-danger" style="font-size: 30px;">Chưa có sản phẩm nào trong giỏ hàng</span>
+                        }
+                    </div>
+                    <div class="cart-footer d-flex mt-30">
+                        <div class="update-checkout w-100">
+                            <a href="@Url.Action("LoadProductByTypeID", "Ajax")/1">Mua hàng tiếp</a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <!-- ****** Cart Area End ****** -->
+    <!-- /.wrapper end -->
+    <!-- jQuery (Necessary for All JavaScript Plugins) -->
+    <script src="js/jquery/jquery-2.2.4.min.js"></script>
+    <!-- Popper js -->
+    <script src="js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Plugins js -->
+    <script src="js/plugins.js"></script>
+    <!-- Active js -->
+    <script src="js/active.js"></script>
+
+
+</body>
+
+</html>
+  
+
+
+

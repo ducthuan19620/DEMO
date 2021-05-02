@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "LoadAllProduct";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div id="result">
+
+</div>
+
+<script type="text/javascript">
+    $.ajax({
+        url: "LoadProductByTypeID",
+        success: function (response) {
+            $("div#result").html(response);
+        }
+    });
+</script>

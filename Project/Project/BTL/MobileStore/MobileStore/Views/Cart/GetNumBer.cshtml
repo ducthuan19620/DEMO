@@ -1,0 +1,16 @@
+﻿@using MobileStore.Models.Entity
+
+@{
+    List<Cart> cart = null;
+    ViewBag.GioHangCount = 0;
+    if(Session["cart"] != null)
+    {
+        cart = (List<Cart>)Session["cart"];
+        ViewBag.GioHangCount = cart.Count;
+    }
+}
+
+<a href='@Url.Action("Index", "Cart")' class="nav-link"><i class="fa fa-shopping-cart" style="font-size: 20px;"></i><span style="margin-left: 5px;">Giỏ hàng:<b class="number" id="numberProducts">
+    @ViewBag.GioHangCount
+</b></span></a>
+
