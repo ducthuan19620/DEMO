@@ -21,7 +21,7 @@ namespace MobileStore.Models.DAO
 
         public Blog GetById(int id)
         {
-            return db.Blogs.Where(i => i.BlogID == id).First();
+            return db.Blogs.Where(i => i.BlogID == id).First(); // thay doi
         }
     }
 }
